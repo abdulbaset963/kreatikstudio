@@ -34,15 +34,18 @@ function toggleLanguage() {
 // Mobile Menu
 function toggleMobileMenu() {
   const container = document.getElementById('mobile-menu-container');
+  const trigger = document.querySelector('.mobile-trigger');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+  if (!container) return;
+
   const isOpen = container.classList.contains('open');
-  
-  if (isOpen) {
-    container.classList.remove('open');
-    document.body.style.overflow = '';
-  } else {
-    container.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
+  container.classList.toggle('open', !isOpen);
+  document.body.style.overflow = !isOpen ? 'hidden' : '';
+
+  if (trigger) trigger.setAttribute('aria-expanded', String(!isOpen));
+  if (menuIcon) menuIcon.classList.toggle('hidden', !isOpen);
+  if (closeIcon) closeIcon.classList.toggle('hidden', isOpen);
 }
 
 // Close on ESC
@@ -135,14 +138,68 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// Form Submit
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const toast = document.getElementById('toast');
-  toast.style.transform = 'translateY(0)';
-  setTimeout(() => { toast.style.transform = 'translateY(200px)'; }, 3000);
-  this.reset();
-});
+// Contact form — submit to Formspree without leaving the page
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  const contactSubmit = document.getElementById('contact-submit');
+  const contactStatus = document.getElementById('contact-status');
+
+  contactForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    if (!this.reportValidity()) return;
+    if (this.querySelector('[name="_gotcha"]')?.value) return;
+
+    const label = contactSubmit?.querySelector('span');
+    const originalLabel = label ? label.textContent : '';
+    const isArabic = document.documentElement.lang === 'ar';
+
+    if (contactSubmit) {
+      contactSubmit.disabled = true;
+      contactSubmit.classList.add('is-loading');
+      if (label) label.textContent = isArabic ? 'جارٍ الإرسال...' : 'Sending...';
+    }
+    if (contactStatus) {
+      contactStatus.textContent = '';
+      contactStatus.className = 'contact-status';
+    }
+
+    try {
+      const response = await fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (!response.ok) throw new Error('Form submission failed');
+
+      this.reset();
+      if (contactStatus) {
+        contactStatus.textContent = isArabic
+          ? 'تم إرسال رسالتك بنجاح. سنتواصل معك قريباً.'
+          : 'Your message was sent successfully. We will get back to you soon.';
+        contactStatus.className = 'contact-status is-success';
+      }
+
+      const toast = document.getElementById('toast');
+      if (toast) {
+        toast.style.transform = 'translateY(0)';
+        setTimeout(() => { toast.style.transform = 'translateY(200px)'; }, 3000);
+      }
+    } catch (error) {
+      if (contactStatus) {
+        contactStatus.textContent = isArabic
+          ? 'تعذر إرسال الرسالة حالياً. حاول مرة أخرى أو راسلنا عبر البريد.'
+          : 'Unable to send your message right now. Please try again or email us directly.';
+        contactStatus.className = 'contact-status is-error';
+      }
+    } finally {
+      if (contactSubmit) {
+        contactSubmit.disabled = false;
+        contactSubmit.classList.remove('is-loading');
+        if (label) label.textContent = originalLabel;
+      }
+    }
+  });
+}
 
 // Smooth Scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {

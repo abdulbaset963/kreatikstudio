@@ -41,7 +41,7 @@
         </a>
       </div>
 
-      <button class="lg:hidden mobile-trigger" onclick="toggleMobileMenu()" aria-label="فتح القائمة">
+      <button class="lg:hidden mobile-trigger" onclick="toggleMobileMenu()" aria-label="فتح القائمة" aria-expanded="false">
         <svg id="menu-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
         <svg id="close-icon" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
@@ -476,7 +476,7 @@
             </div>
             <div>
               <div class="text-sm text-gray-400 mb-1" data-en="Email" data-ar="البريد الإلكتروني">البريد الإلكتروني</div>
-              <div class="font-medium">hello@kreatik.studio</div>
+              <div class="font-medium"><a href="mailto:abdulbasetalito@gmail.com" class="contact-email-link">abdulbasetalito@gmail.com</a></div>
             </div>
           </div>
           <div class="contact-item flex items-start gap-4">
@@ -490,21 +490,25 @@
           </div>
         </div>
       </div>
-      <div class="reveal glass rounded-3xl p-8 lg:p-10">
-        <form id="contactForm" class="space-y-6">
-          <div class="grid md:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-sm text-gray-400 mb-2" data-en="Name" data-ar="الاسم">الاسم</label>
-              <input type="text" required class="form-input w-full bg-primary/50 border border-white/10 rounded-xl px-4 py-3 text-white transition" placeholder="أدخل اسمك" data-en-placeholder="Enter your name" data-ar-placeholder="أدخل اسمك">
+      <div class="contact-form-shell reveal">
+        <div class="contact-form-heading">
+          <span class="contact-form-kicker" data-en="LET'S TALK" data-ar="لنبدأ الحديث">لنبدأ الحديث</span>
+          <p data-en="Tell us what you are building and we will get back to you soon." data-ar="أخبرنا بما تريد تنفيذه وسنتواصل معك قريباً.">أخبرنا بما تريد تنفيذه وسنتواصل معك قريباً.</p>
+        </div>
+        <form id="contactForm" class="contact-form" action="https://formspree.io/f/xdeowagg" method="POST" novalidate>
+          <div class="contact-form-grid">
+            <div class="contact-field">
+              <label for="contact-name" data-en="Name" data-ar="الاسم">الاسم</label>
+              <input id="contact-name" name="name" type="text" autocomplete="name" required class="form-input" placeholder="أدخل اسمك" data-en-placeholder="Enter your name" data-ar-placeholder="أدخل اسمك">
             </div>
-            <div>
-              <label class="block text-sm text-gray-400 mb-2" data-en="Email" data-ar="البريد">البريد</label>
-              <input type="email" required class="form-input w-full bg-primary/50 border border-white/10 rounded-xl px-4 py-3 text-white transition" placeholder="example@email.com">
+            <div class="contact-field">
+              <label for="contact-email" data-en="Email" data-ar="البريد">البريد</label>
+              <input id="contact-email" name="email" type="email" autocomplete="email" required class="form-input" placeholder="example@email.com">
             </div>
           </div>
-          <div>
-            <label class="block text-sm text-gray-400 mb-2" data-en="Service" data-ar="الخدمة">الخدمة</label>
-            <select class="form-input w-full bg-primary/50 border border-white/10 rounded-xl px-4 py-3 text-white transition">
+          <div class="contact-field">
+            <label for="contact-service" data-en="Service" data-ar="الخدمة">الخدمة</label>
+            <select id="contact-service" name="service" class="form-input">
               <option value="" data-en="Select a service" data-ar="اختر خدمة">اختر خدمة</option>
               <option value="creative" data-en="Creative" data-ar="إبداعي">إبداعي</option>
               <option value="motion" data-en="Motion" data-ar="موشن">موشن</option>
@@ -512,14 +516,17 @@
               <option value="growth" data-en="Growth" data-ar="نمو">نمو</option>
             </select>
           </div>
-          <div>
-            <label class="block text-sm text-gray-400 mb-2" data-en="Message" data-ar="الرسالة">الرسالة</label>
-            <textarea rows="4" required class="form-input w-full bg-primary/50 border border-white/10 rounded-xl px-4 py-3 text-white transition resize-none" placeholder="أخبرنا عن مشروعك..." data-en-placeholder="Tell us about your project..." data-ar-placeholder="أخبرنا عن مشروعك..."></textarea>
+          <div class="contact-field">
+            <label for="contact-message" data-en="Message" data-ar="الرسالة">الرسالة</label>
+            <textarea id="contact-message" name="message" rows="5" required class="form-input" placeholder="أخبرنا عن مشروعك..." data-en-placeholder="Tell us about your project..." data-ar-placeholder="أخبرنا عن مشروعك..."></textarea>
           </div>
-          <button type="submit" class="w-full btn-primary py-4 rounded-xl font-semibold flex items-center justify-center gap-2">
+          <input type="hidden" name="_subject" value="New message from KREATIK website">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="form-honeypot" aria-hidden="true">
+          <button id="contact-submit" type="submit" class="contact-submit btn-primary">
             <span data-en="Send Message" data-ar="إرسال الرسالة">إرسال الرسالة</span>
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
           </button>
+          <div id="contact-status" class="contact-status" role="status" aria-live="polite"></div>
         </form>
       </div>
     </div>

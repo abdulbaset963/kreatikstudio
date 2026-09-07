@@ -772,3 +772,695 @@ section p{font-size:16px;line-height:1.9}
   .hero-disciplines{gap:8px;}
   .hero-discipline{min-height:35px;padding:0 13px;font-size:12.5px;}
 }
+
+
+/* ===== KREATIK UX / RESPONSIVE PASS — SEPTEMBER 2026 ===== */
+
+/* Contact form: stronger hierarchy, softer glass, clearer states */
+.contact-form-shell{
+  position:relative;
+  overflow:hidden;
+  padding:clamp(22px,3vw,38px);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 88% 8%, rgba(193,232,57,.10), transparent 27%),
+    linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.018));
+  box-shadow:0 24px 80px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.035);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+}
+.contact-form-shell::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  background:linear-gradient(120deg, rgba(193,232,57,.08), transparent 26%, transparent 72%, rgba(255,255,255,.03));
+}
+.contact-form-heading{position:relative;margin-bottom:24px}
+.contact-form-kicker{
+  display:inline-flex;
+  align-items:center;
+  min-height:30px;
+  padding:0 11px;
+  border:1px solid rgba(193,232,57,.20);
+  border-radius:999px;
+  background:rgba(193,232,57,.06);
+  color:var(--k-lime-strong);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.10em;
+}
+.contact-form-heading p{
+  margin-top:10px;
+  max-width:38rem;
+  color:#8f9893;
+  font-size:14px;
+  line-height:1.8;
+}
+.contact-form{position:relative;display:grid;gap:18px}
+.contact-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.contact-field{display:grid;gap:8px;min-width:0}
+.contact-field label{
+  color:#AEB6B2;
+  font-size:13px;
+  font-weight:500;
+}
+.form-input{
+  width:100%;
+  min-width:0;
+  min-height:52px;
+  padding:12px 14px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:14px;
+  background:rgba(8,10,9,.58);
+  color:#F2F5F3;
+  font:400 15px/1.55 'IBM Plex Sans Arabic',sans-serif;
+  transition:border-color .25s ease, box-shadow .25s ease, background .25s ease, transform .25s ease;
+}
+textarea.form-input{min-height:132px;resize:vertical}
+select.form-input{appearance:auto}
+.form-input:hover{border-color:rgba(255,255,255,.16);background:rgba(8,10,9,.68)}
+.form-input:focus{
+  border-color:rgba(193,232,57,.72);
+  background:rgba(8,10,9,.78);
+  box-shadow:0 0 0 4px rgba(193,232,57,.08),0 12px 32px rgba(0,0,0,.16);
+  outline:none;
+}
+.contact-submit{
+  width:100%;
+  min-height:54px;
+  border:1px solid rgba(193,232,57,.18);
+  border-radius:14px;
+  padding:0 18px;
+  font-size:15px;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  cursor:pointer;
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease, opacity .25s ease;
+}
+.contact-submit:hover{
+  transform:translateY(-1px);
+  box-shadow:0 14px 34px rgba(193,232,57,.14);
+}
+.contact-submit:disabled{opacity:.65;cursor:wait;transform:none}
+.contact-submit.is-loading svg{animation:contactSpinner .9s linear infinite}
+@keyframes contactSpinner{to{transform:rotate(360deg)}}
+.contact-status{
+  min-height:20px;
+  font-size:13px;
+  line-height:1.7;
+  color:#89918D;
+  text-align:center;
+}
+.contact-status.is-success{color:#C1E839}
+.contact-status.is-error{color:#FF8F8F}
+.form-honeypot{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+.contact-email-link{
+  color:#F2F5F3;
+  text-decoration:none;
+  transition:color .2s ease;
+  overflow-wrap:anywhere;
+}
+.contact-email-link:hover{color:var(--k-lime-strong)}
+
+/* Responsive foundations */
+img,svg,video{max-width:100%;height:auto}
+button,input,textarea,select{font:inherit}
+body{min-width:320px}
+section{scroll-margin-top:82px}
+#navbar .max-w-7xl{width:100%}
+#mobile-menu-container{overscroll-behavior:contain}
+.mobile-menu-panel{overscroll-behavior:contain}
+
+/* Tablet: let content breathe while keeping the desktop rhythm */
+@media (max-width:1024px){
+  #navbar > div{padding-left:24px;padding-right:24px}
+  .hero-creative-stage{width:100%}
+  .contact-form-shell{border-radius:24px}
+}
+
+/* Mobile: deliberate single-column layout and safe spacing */
+@media (max-width:767px){
+  #navbar > div{padding-left:16px;padding-right:16px}
+  #navbar .h-20{height:68px}
+  #navbar .kreatik-logo-image{width:84px!important}
+  section{scroll-margin-top:70px}
+  .hero-creative-stage{min-height:390px;aspect-ratio:auto;height:390px}
+  .hero-title{font-size:clamp(2.7rem,13vw,4rem);max-width:100%;line-height:1.08}
+  .hero-copy{max-width:100%;font-size:15.5px;line-height:1.85}
+  .hero-disciplines{max-width:100%}
+  .contact-form-shell{padding:20px 16px;border-radius:22px}
+  .contact-form-grid{grid-template-columns:1fr;gap:16px}
+  .contact-form{gap:16px}
+  .contact-form-heading{margin-bottom:20px}
+  .contact-form-heading p{font-size:13.5px;line-height:1.75}
+  .form-input{min-height:50px;font-size:16px}
+  textarea.form-input{min-height:120px}
+  .contact-submit{min-height:52px}
+  .contact-info-list{gap:18px}
+  .contact-item{align-items:flex-start!important}
+  .contact-item>.w-12{width:48px;height:48px;flex:0 0 48px}
+  .contact-item .font-medium{font-size:15px;line-height:1.55}
+  .mobile-menu-panel{max-width:min(390px,100vw)}
+  .mobile-menu-header{padding:16px}
+  .mobile-menu-header .kreatik-logo-image{width:100px!important}
+  .mobile-nav-item{padding:17px 16px;font-size:1.22rem}
+  .mobile-nav-item:hover,.mobile-nav-item.active{padding-right:24px}
+  html[dir="ltr"] .mobile-nav-item:hover,html[dir="ltr"] .mobile-nav-item.active{padding-left:24px;padding-right:16px}
+  .mobile-menu-footer{padding:16px}
+  .site-footer{padding:48px 0 22px}
+  .footer-top{grid-template-columns:1fr;gap:28px}
+  .footer-brand{grid-column:auto}
+  .footer-bottom{gap:10px}
+  .footer-bottom p,.footer-bottom>div{font-size:12px;line-height:1.7}
+  .hero-pointer-hint{pointer-events:none}
+  .hero-creative-stage{cursor:default}
+}
+
+/* Narrow phones: avoid oversized type and edge collisions */
+@media (max-width:420px){
+  #navbar .kreatik-logo-image{width:78px!important}
+  .hero-title{font-size:clamp(2.45rem,12.6vw,3.3rem)}
+  .hero-creative-stage{height:350px;min-height:350px;border-radius:20px}
+  .hero-floating-tag{max-width:44%;overflow:hidden;text-overflow:ellipsis}
+  .tag-top{left:10px;top:10px}
+  .tag-bottom{right:10px;bottom:10px}
+  .hero-pointer-hint{max-width:78%;padding:7px 10px}
+  .contact-form-shell{padding:18px 14px}
+  .contact-form-kicker{font-size:10px}
+}
+
+/* Accessibility / touch: no hover-lift surprises on touch devices */
+@media (hover:none){
+  .service-card:hover,.btn-primary:hover,.contact-submit:hover{transform:none}
+  .kreatik-logo:hover{transform:none}
+}
+
+
+/* ===== V6 VISUAL POLISH ===== */
+/* Header: reduce the brand mark without changing the surrounding layout */
+#navbar .kreatik-logo-image{
+  width:84px !important;
+  height:auto !important;
+  max-height:36px !important;
+}
+#navbar .kreatik-logo{
+  min-width:84px !important;
+}
+
+/* CTA buttons: never inherit browser link underlines */
+.btn-primary,
+.btn-outline,
+.contact-submit{
+  text-decoration:none !important;
+}
+
+/* Portfolio media: preserve image proportions and use a consistent editorial frame */
+#work-grid .work-card > .relative{
+  height:auto !important;
+  aspect-ratio:16 / 9;
+  min-height:0;
+}
+#work-grid .work-image{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  overflow:hidden;
+}
+#work-grid .work-image img{
+  display:block;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover;
+  object-position:center;
+  transform:none;
+}
+#work-grid .work-card:hover .work-image img{
+  transform:scale(1.025);
+}
+
+/* Footer: three real columns only, so Quick Links / Services sit at the left edge */
+.footer-top{
+  grid-template-columns:minmax(0,1.55fr) 180px 180px;
+  gap:52px;
+}
+.footer-column{
+  text-align:left;
+}
+html[dir="rtl"] .footer-column{
+  text-align:left;
+}
+.footer-column ul{
+  justify-items:start;
+  text-align:left;
+}
+.footer-column a,
+.footer-title{
+  text-align:left;
+}
+
+@media (max-width:1100px){
+  .footer-top{
+    grid-template-columns:minmax(0,1.4fr) 160px 160px;
+    gap:34px;
+  }
+}
+
+@media (max-width:767px){
+  #navbar .kreatik-logo-image{
+    width:76px !important;
+    max-height:34px !important;
+  }
+  #navbar .kreatik-logo{
+    min-width:76px !important;
+  }
+  #work-grid .work-card > .relative{
+    aspect-ratio:16 / 9;
+  }
+  .footer-top{
+    grid-template-columns:1fr;
+    gap:26px;
+  }
+  .footer-column,
+  html[dir="rtl"] .footer-column{
+    width:100%;
+    text-align:left;
+  }
+  .footer-column ul{
+    justify-items:start;
+  }
+}
+
+@media (max-width:420px){
+  #navbar .kreatik-logo-image{
+    width:70px !important;
+    max-height:31px !important;
+  }
+  #navbar .kreatik-logo{
+    min-width:70px !important;
+  }
+}
+
+/* ===== V7 MOBILE MENU + FOOTER REFINEMENT ===== */
+
+/* Footer: keep the navigation/service columns visually anchored to the left side */
+.footer-top{
+  grid-template-columns:minmax(0,1fr) 150px 150px;
+  align-items:start;
+}
+.footer-column{
+  width:150px;
+  justify-self:start;
+  text-align:left !important;
+}
+.footer-column ul{
+  justify-items:start !important;
+  text-align:left !important;
+}
+.footer-column a,
+.footer-title{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  text-align:left !important;
+}
+.footer-title{margin-bottom:16px}
+.footer-column a{line-height:1.7}
+
+@media (max-width:1100px) and (min-width:768px){
+  .footer-top{
+    grid-template-columns:minmax(0,1fr) 140px 140px;
+    gap:30px;
+  }
+  .footer-column{width:140px}
+}
+
+@media (max-width:767px){
+  .site-footer{
+    padding:52px 0 24px;
+  }
+  .site-footer > .max-w-7xl{
+    padding-left:20px;
+    padding-right:20px;
+  }
+  .footer-top{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:34px 30px;
+    margin-bottom:38px;
+  }
+  .footer-brand{
+    grid-column:1 / -1;
+  }
+  .footer-column{
+    width:auto;
+    justify-self:start;
+    min-width:0;
+  }
+  .footer-column a,
+  .footer-title{
+    width:auto;
+    max-width:none;
+    text-align:left !important;
+  }
+  .footer-column ul{gap:9px}
+  .footer-column a{font-size:14px!important}
+  .footer-title{font-size:14px;margin-bottom:14px}
+}
+
+/* Mobile navigation: narrower, calmer and closer to the KREATIK visual system */
+@media (max-width:767px){
+  .mobile-overlay{
+    background:rgba(0,0,0,.62);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+  }
+  .mobile-menu-panel{
+    width:min(88vw,360px);
+    max-width:360px;
+    height:100dvh;
+    background:
+      radial-gradient(circle at 90% 0%, rgba(184,255,0,.055), transparent 32%),
+      linear-gradient(180deg,#111311 0%,#0A0C0B 100%);
+    border-left:1px solid rgba(184,255,0,.14);
+    box-shadow:-28px 0 70px rgba(0,0,0,.45);
+  }
+  html[dir="ltr"] .mobile-menu-panel{
+    width:min(88vw,360px);
+    border-right:1px solid rgba(184,255,0,.14);
+    box-shadow:28px 0 70px rgba(0,0,0,.45);
+  }
+  .mobile-menu-header{
+    padding:18px 18px 17px;
+    min-height:78px;
+    gap:16px;
+  }
+  .mobile-menu-header .kreatik-logo-image{
+    width:92px !important;
+    max-height:34px !important;
+  }
+  .mobile-menu-header > button{
+    width:38px;
+    height:38px;
+    padding:0 !important;
+    display:grid;
+    place-items:center;
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:12px !important;
+    background:rgba(255,255,255,.035);
+    color:#C6CEC9;
+    flex:0 0 38px;
+    transition:all .25s ease;
+  }
+  .mobile-menu-header > button:hover{
+    color:#B8FF00;
+    border-color:rgba(184,255,0,.32);
+    background:rgba(184,255,0,.07);
+  }
+  .mobile-menu-header > button svg{
+    width:19px !important;
+    height:19px !important;
+  }
+  .mobile-menu-nav{
+    padding:8px 0;
+    overflow:visible;
+  }
+  .mobile-nav-item{
+    padding:0 18px !important;
+    min-height:62px;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    font-size:1.05rem;
+    font-weight:500;
+    color:#9EA7A2;
+    border-bottom:1px solid rgba(255,255,255,.055);
+    letter-spacing:-.01em;
+  }
+  .mobile-nav-item:first-child{
+    border-top:1px solid rgba(255,255,255,.055);
+  }
+  .mobile-nav-item::before{
+    right:auto;
+    left:0;
+    width:0;
+    height:34px;
+    border-radius:0 3px 3px 0;
+    transition:width .25s ease;
+  }
+  html[dir="rtl"] .mobile-nav-item::before{
+    right:0;
+    left:auto;
+    border-radius:3px 0 0 3px;
+  }
+  .mobile-nav-item:hover,
+  .mobile-nav-item.active{
+    padding-right:18px !important;
+    padding-left:24px !important;
+    color:#B8FF00;
+    background:rgba(184,255,0,.035);
+  }
+  html[dir="ltr"] .mobile-nav-item:hover,
+  html[dir="ltr"] .mobile-nav-item.active{
+    padding-left:24px !important;
+    padding-right:18px !important;
+  }
+  .mobile-nav-item:hover::before,
+  .mobile-nav-item.active::before{
+    width:3px;
+  }
+  .mobile-menu-footer{
+    padding:18px;
+    border-top:1px solid rgba(255,255,255,.07);
+    background:rgba(7,9,8,.34);
+  }
+  .mobile-menu-footer button,
+  .mobile-menu-footer > a{
+    min-height:49px;
+    padding-top:12px !important;
+    padding-bottom:12px !important;
+    border-radius:14px !important;
+  }
+  .mobile-menu-footer button{
+    background:rgba(255,255,255,.025);
+    border-color:rgba(255,255,255,.12) !important;
+    color:#D9DEDB;
+  }
+  .mobile-menu-footer button:hover{
+    background:rgba(184,255,0,.055);
+    border-color:rgba(184,255,0,.28) !important;
+    color:#B8FF00;
+  }
+  .mobile-menu-footer > a{
+    box-shadow:0 10px 24px rgba(184,255,0,.10);
+  }
+}
+
+@media (max-width:420px){
+  .mobile-menu-panel{
+    width:min(90vw,350px);
+  }
+  .mobile-menu-header{
+    padding:16px;
+    min-height:74px;
+  }
+  .mobile-menu-header .kreatik-logo-image{
+    width:88px !important;
+  }
+  .mobile-nav-item{
+    min-height:58px;
+    font-size:1rem;
+  }
+  .mobile-menu-footer{padding:16px}
+}
+
+/* ===== V8: unified side menu + polished mobile footer ===== */
+
+/* Keep the sidebar visually identical across viewport sizes; only its width changes. */
+.mobile-menu-panel{
+  width:min(390px, 92vw);
+  max-width:390px;
+  background:
+    radial-gradient(circle at 88% 4%, rgba(184,255,0,.055), transparent 30%),
+    linear-gradient(180deg,#111311 0%,#0A0C0B 100%);
+  border-left:1px solid rgba(184,255,0,.14);
+  box-shadow:-26px 0 70px rgba(0,0,0,.46);
+}
+html[dir="ltr"] .mobile-menu-panel{
+  width:min(390px, 92vw);
+  border-left:0;
+  border-right:1px solid rgba(184,255,0,.14);
+  box-shadow:26px 0 70px rgba(0,0,0,.46);
+}
+
+.mobile-menu-header{
+  min-height:88px;
+  padding:18px 20px;
+  gap:18px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.mobile-menu-header .kreatik-logo-image{
+  width:104px !important;
+  height:auto !important;
+  max-height:42px !important;
+}
+.mobile-menu-header > button{
+  width:42px;
+  height:42px;
+  flex:0 0 42px;
+  display:grid;
+  place-items:center;
+  padding:0 !important;
+  border-radius:13px !important;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.12);
+  color:#D5DAD7;
+}
+.mobile-menu-header > button svg{width:19px !important;height:19px !important}
+
+.mobile-menu-nav{
+  padding:12px 0;
+  overflow:visible;
+}
+.mobile-nav-item{
+  min-height:64px;
+  padding:0 20px !important;
+  display:flex;
+  align-items:center;
+  font-size:1.1rem;
+  font-weight:500;
+  color:#A3AAA7;
+  border-bottom:1px solid rgba(255,255,255,.055);
+  background:transparent;
+}
+.mobile-nav-item:first-child{border-top:1px solid rgba(255,255,255,.055)}
+.mobile-nav-item:hover,
+.mobile-nav-item.active{
+  color:#B8FF00;
+  background:rgba(184,255,0,.035);
+  padding-right:28px !important;
+  padding-left:20px !important;
+}
+html[dir="ltr"] .mobile-nav-item:hover,
+html[dir="ltr"] .mobile-nav-item.active{
+  padding-left:28px !important;
+  padding-right:20px !important;
+}
+.mobile-nav-item::before{
+  height:38px;
+  border-radius:3px 0 0 3px;
+}
+html[dir="ltr"] .mobile-nav-item::before{border-radius:0 3px 3px 0}
+
+.mobile-menu-footer{
+  padding:18px 20px 20px;
+  border-top:1px solid rgba(255,255,255,.07);
+  background:rgba(7,9,8,.34);
+}
+.mobile-menu-footer button,
+.mobile-menu-footer > a{
+  min-height:52px;
+  border-radius:16px !important;
+}
+.mobile-menu-footer button{margin-bottom:10px !important}
+
+/* Desktop/tablet: same component language as mobile, with a touch more breathing room. */
+@media (min-width:768px){
+  .mobile-menu-panel{width:390px;max-width:390px}
+  .mobile-menu-header{padding:20px 22px;min-height:92px}
+  .mobile-menu-nav{padding:14px 0}
+  .mobile-nav-item{min-height:68px;padding:0 22px !important;font-size:1.16rem}
+  .mobile-nav-item:hover,.mobile-nav-item.active{padding-right:30px !important}
+  html[dir="ltr"] .mobile-nav-item:hover,html[dir="ltr"] .mobile-nav-item.active{padding-left:30px !important;padding-right:22px !important}
+  .mobile-menu-footer{padding:20px 22px 22px}
+}
+
+/* Mobile footer: two clean navigation cards instead of a loose vertical stack. */
+@media (max-width:767px){
+  .site-footer{
+    padding:46px 0 20px;
+  }
+  .site-footer > .max-w-7xl{
+    padding-left:18px;
+    padding-right:18px;
+  }
+  .footer-top{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:14px;
+    margin-bottom:30px;
+  }
+  .footer-brand{
+    grid-column:1 / -1;
+    padding-bottom:8px;
+  }
+  .footer-column{
+    width:auto !important;
+    min-width:0;
+    justify-self:stretch !important;
+    padding:16px 15px 18px;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:18px;
+    background:rgba(255,255,255,.018);
+    text-align:right !important;
+  }
+  html[dir="ltr"] .footer-column{text-align:left !important}
+  .footer-title,
+  .footer-column a{
+    width:auto !important;
+    max-width:100%;
+    text-align:inherit !important;
+  }
+  .footer-title{
+    margin-bottom:13px !important;
+    font-size:14px !important;
+    font-weight:700;
+    color:#F2F4F3;
+  }
+  .footer-column ul{
+    gap:8px !important;
+    justify-items:stretch !important;
+    text-align:inherit !important;
+  }
+  .footer-column li{display:block}
+  .footer-column a{
+    display:block;
+    font-size:13px !important;
+    line-height:1.8 !important;
+    color:#8F9894 !important;
+  }
+  .footer-column a:hover{color:#B8FF00 !important}
+  .footer-bottom{
+    padding-top:18px;
+    border-top:1px solid rgba(255,255,255,.06);
+    gap:7px;
+  }
+  .footer-brand p{font-size:14px;line-height:1.85}
+  .footer-brand .social-links{margin-top:18px}
+}
+
+@media (max-width:420px){
+  .footer-top{gap:10px}
+  .footer-column{padding:14px 12px 16px;border-radius:16px}
+  .footer-title{font-size:13px !important}
+  .footer-column a{font-size:12.5px !important}
+  .mobile-menu-header{padding:16px 17px;min-height:82px}
+  .mobile-menu-header .kreatik-logo-image{width:98px !important;max-height:40px !important}
+  .mobile-nav-item{min-height:60px;font-size:1.03rem}
+  .mobile-menu-footer{padding:16px 17px 18px}
+}
